@@ -1,6 +1,8 @@
 (ns tableschema-clj.field)
 
-(defn make-field [descriptor])
+(defn make-descriptor [descriptor])
 
-(defn cast-value [value])
+(defn cast-value [descriptor value])
+
+(defn test-value [descriptor value])
 

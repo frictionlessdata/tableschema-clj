@@ -2,7 +2,7 @@
   (:require [tableschema-clj.field :refer :all]
             [clojure.test :refer :all]))
 
-;; TODO: replace with spec/gen generated data
+;; TODO: augment with spec/gen generated data
 (defonce DESCRIPTOR-MIN {:name "id"})
 (defonce DESCRIPTOR-MIN-PROCESSED {:name "id"
                                    :type "string"
@@ -15,12 +15,10 @@
                          :bare-number "false"
                          :constraints {:required true}})
 
-;; TODO: cast-value
-;; TODO: cast-value-error
-(deftest test-make-field
-  (is (= (make-field DESCRIPTOR-MIN) DESCRIPTOR-MIN-PROCESSED)
+(deftest test-make-descriptor
+  (is (= (make-descriptor DESCRIPTOR-MIN) DESCRIPTOR-MIN-PROCESSED)
       "A minimal field descriptor should return a descriptor with defaults")
-  (are [field descriptor] (get (make-field DESCRIPTOR-MIN) field)
+  (are [field descriptor] (get (make-descriptor DESCRIPTOR-MIN) field)
     ;; name
     [:name DESCRIPTOR-MIN] "id"
     [:name DESCRIPTOR-MAX] "amount"
@@ -39,5 +37,17 @@
     )
   )
 
-(deftest cast-value)
+;; TODO: custom exceptions
+(deftest test-cast-value
+  (let [desc-max (make-descriptor DESCRIPTOR-MAX)]
+    (is (= (cast-value desc-max "£10") (float 10.0))
+        "cast-value should cast valid value")
+    (is (thrown? Exception (cast-value desc-max "notdecimal"))
+        "cast-value should with an incorrect value")))
 
+(deftest test-test-value
+  (let [desc-max (make-descriptor DESCRIPTOR-MAX)]
+    (is (= (test-value desc-max "30.78") true)
+        "test-value should return true for valid value")
+    (is (= (test-value desc-max 100) false)
+        "test-value should return false for invalid value")))
