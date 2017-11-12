@@ -39,16 +39,16 @@
    ))
 
 ;; TODO: custom exceptions
-(deftest test-cast-value
-  (let [desc-max (make-descriptor DESCRIPTOR-MAX)]
-    (is (= (cast-value desc-max "£10") (float 10.0))
-        "cast-value should cast valid value")
-    (is (thrown? Exception (cast-value desc-max "notdecimal"))
-        "cast-value should raise with an incorrect value")))
+;; (deftest test-cast-value
+;;   (let [desc-max (make-descriptor DESCRIPTOR-MAX)]
+;;     (is (= (cast-value desc-max "£10") (float 10.0))
+;;         "cast-value should cast valid value")
+;;     (is (thrown? Exception (cast-value desc-max "notdecimal"))
+;;         "cast-value should raise with an incorrect value")))
 
-(deftest test-test-value
-  (let [desc-max (make-descriptor DESCRIPTOR-MAX)]
-    (is (= (test-value desc-max "30.78") true)
-        "test-value should return true for valid value")
-    (is (= (test-value desc-max 100) false)
-        "test-value should return false for invalid value")))
+;; (deftest test-test-value
+;;   (let [desc-max (make-descriptor DESCRIPTOR-MAX)]
+;;     (is (= (test-value desc-max "30.78") true)
+;;         "test-value should return true for valid value")
+;;     (is (= (test-value desc-max 100) false)
+;;         "test-value should return false for invalid value")))
