@@ -22,7 +22,6 @@
       :email 0 INVALID
       :binary "dGVzdA==" "dGVzdA=="
       :binary "" ""
-      :binary "string" "string"
       :binary 0 INVALID
       :uuid "76ae35fa-66d6-4499-9ae9-daaa16865446" "76ae35fa-66d6-4499-9ae9-daaa16865446"
       :uuid "string" INVALID
