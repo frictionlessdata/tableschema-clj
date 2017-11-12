@@ -27,5 +27,9 @@
       :dd-mm-yy (cond
                   (s/valid? ::date-type value) value
                   (s/valid? ::dd-mm-yy value) (local-date "dd/MM/yy" value)
-                  :else :clojure.spec.alpha/invalid))
-    :clojure.spec.alpha/invalid))
+                  :else ::s/invalid))
+    ::s/invalid))
+
+(s/fdef cast-date
+        :args (s/cat :format keyword? :value ::date)
+        :ret ::date-type)
