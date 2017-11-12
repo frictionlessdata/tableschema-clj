@@ -6,5 +6,6 @@
   :dependencies [[org.clojure/clojure "1.9.0-alpha16"]
                  [org.clojure/test.check "0.10.0-alpha2"]
                  [org.clojure/data.json "0.2.6"]
+                 [clojure.java-time "0.3.0"]
                  [commons-validator "1.4.1"]]
   :plugins [[lein-cloverage "1.0.9"]])
