@@ -33,4 +33,5 @@
     :email (s/conform :string/email value)
     :uri (s/conform :string/uri value)
     :uuid (s/conform :string/uuid value)
-    :binary (s/conform :string/binary value)))
+    :binary (s/conform :string/binary value)
+    ::s/invalid))

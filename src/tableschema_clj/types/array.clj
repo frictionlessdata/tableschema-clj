@@ -11,10 +11,14 @@
 (s/def ::sequential sequential?)
 (s/def ::string string?)
 
-(defn cast-array [format value]
+;; make a variable argument function
+;; explain that "format" is for the API
+(defn cast-vector [format value]
   (cond
     (s/valid? ::sequential value) (into [] value)
     (s/valid? ::string value) (let [parsed (read-json value)]
                                 (s/conform ::sequential parsed))
     :else :clojure.spec.alpha/invalid))
 
+(defn cast-array [format value]
+  (cast-vector format value))

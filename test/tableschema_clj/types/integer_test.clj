@@ -4,7 +4,6 @@
    [clojure.spec.alpha :as s]
    [clojure.test :refer :all]))
 
-
 ;; TODO: bare-number check
 (deftest test-cast-integer
   (are [value result] (= (cast-integer value) result)

@@ -19,5 +19,5 @@
         (let [[type val] parsed]
           (case type
             :integer value
-            :string (parse-int value))))))
+            :string (safe-parse value))))))
 

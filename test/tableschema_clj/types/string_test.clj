@@ -10,6 +10,7 @@
   (are [format value result] (= (cast-string format value) result)
       :default "string" "string"
       :default "" ""
+      :default true INVALID
       :default 0 INVALID
       :uri "http://google.com" "http://google.com"
       :uri "string" INVALID
@@ -27,6 +28,7 @@
       :uuid "string" INVALID
       :uuid "" INVALID
       :uuid 0 INVALID
+      :notaformat "string" INVALID
       ))
 
 
