@@ -1,5 +1,5 @@
 (ns tableschema-clj.types.datetime-test
-  (:require [tableschema-clj.types.date :refer :all]
+  (:require [tableschema-clj.types.datetime :refer :all]
             [java-time :refer [local-date-time]]
             [clojure.test :refer :all]))
 
