@@ -2,6 +2,12 @@
   (:require [clojure.spec.alpha :as s]
             [java-time :refer [local-date]]))
 
+(defn date-formatter [fmt]
+  (-> fmt
+      (clojure.string/replace #"%d" "dd")
+      (clojure.string/replace #"%m" "MM")
+      (clojure.string/replace #"%y" "yy")))
+
 (def date-regexes
   {:ddmmyy #"^(0[1-9]|[12]\d|3[01])[/-](0[1-9]|1[012])[/-]\d\d$"
    :ddmmyyyy #"^(0[1-9]|[12]\d|3[01])[/-](0[1-9]|1[012])[/-]\d\d\d\d$"
