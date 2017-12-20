@@ -1,12 +1,9 @@
 (ns tableschema-clj.types.datetime
   (:require [clojure.spec.alpha :as s]
             [tableschema-clj.types.date :refer [date-formatter]]
+            [tableschema-clj.types.time :refer [time-formatter]]
             [java-time :refer [local-date-time formatter]]))
 
-(defn time-formatter [fmt]
-  (-> fmt
-      (clojure.string/replace #"%H" "HH")
-      (clojure.string/replace #"%M" "mm")))
 
 (defn datetime-formatter [fmt]
   (try
