@@ -1,7 +1,7 @@
 (ns tableschema-clj.types.datetime
   (:require [clojure.spec.alpha :as s]
             [tableschema-clj.types.date :refer [date-formatter]]
-            [java-time :refer [local-date-time]]))
+            [java-time :refer [local-date-time formatter]]))
 
 (defn time-formatter [fmt]
   (-> fmt
@@ -12,8 +12,16 @@
   (try
     (-> fmt
         date-formatter
-        time-formatter)
+        time-formatter
+        formatter)
     (catch Exception e false)))
+
+(defn make-datetime [fmt datetime]
+  (try (local-date-time (datetime-formatter fmt) datetime)
+       (catch Exception e false)))
+
+(defn sql-datetime-to-datetime [sql]
+  (local-date-time (apply str (butlast sql))))
 
 (def datetime-regexes
   {:iso #"^\d\d\d\d-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])T(0[1-9]|1[012]):([0-5][0-9]):([0-5][0-9])Z$"})
@@ -25,22 +33,16 @@
 
 (s/def ::datetime (s/or :datetime ::datetime-type :iso (s/or :datetime ::datetime-type :string (s/and string? ::iso-datetime))))
 
+(s/def ::datetime-pair (fn [{:keys [format value]}] (make-datetime format value)))
+
+(s/def ::string string?)
+
 (defn cast-datetime [format value]
-  (cond 
-    (= format "default") (s/conform ::datetime value)
-    (= format "any") (s/conform ::datetime value)
-    (datetime-formatter format) (local-date-time (datetime-formatter format) value)
-    :else ::s/invalid)
+  (if (s/valid? ::datetime value)
+    (cond
+      (s/valid? ::datetime-type value) value
+      (s/valid? ::iso-datetime value) (sql-datetime-to-datetime value)
+      :else ::s/invalid)
+    (if (s/valid? ::datetime-pair {:format format :value value}) (make-datetime format value) ::s/invalid)
+    )
   )
-
-;; (cast-datetime "%d/%m/%y %H:%M")
-(local-date-time 2006 11 21 16 30)
-(s/conform ::datetime-type (local-date-time 2014 1 1 6))
-(cast-datetime "default" (local-date-time 2014 1 1 6))
-;; (cast-datetime "default" true)
-(s/conform ::datetime "2014-01-01T06:00:00Z")
-(s/conform ::datetime-type "2014-01-01T06:00:00Z")
-(s/conform ::iso-datetime "2014-01-01T06:00:00Z")
-
-(cast-datetime "%d/%m/%y %H:%M" "21/11/06 16:30")
-(datetime-formatter "%d/%m/%y %H:%M")

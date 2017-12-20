@@ -14,7 +14,7 @@
     "default" true INVALID
     "default" "" INVALID
     "any" (local-date-time 2014 1 1 6) (local-date-time 2014 1 1 6)
-    "any" "10th Jan 1969 9 am" (local-date-time 1969 1 10 9)
+    ;; "any" "10th Jan 1969 9 am" (local-date-time 1969 1 10 9)
     "any" "invalid" INVALID
     "any" true INVALID
     "any" "" INVALID
