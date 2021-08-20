@@ -1,7 +1,7 @@
 # tableschema-clj
 
-[![Build Status](https://travis-ci.org/frictionlessdata/tableschema-clj.svg?branch=master)](https://travis-ci.org/frictionlessdata/tableschema-clj)
-[![Coverage Status](https://coveralls.io/repos/github/frictionlessdata/tableschema-clj/badge.svg?branch=master)](https://coveralls.io/github/frictionlessdata/tableschema-clj?branch=master)
+[![Build](https://img.shields.io/github/workflow/status/frictionlessdata/tableschema-clj/general/main)](https://github.com/frictionlessdata/tableschema-clj/actions)
+[![Coverage](https://img.shields.io/codecov/c/github/frictionlessdata/tableschema-clj/main)](https://codecov.io/gh/frictionlessdata/tableschema-clj)
 [![Codebase](https://img.shields.io/badge/codebase-github-brightgreen)](https://github.com/frictionlessdata/tableschema-clj)
 [![Support](https://img.shields.io/badge/support-discord-brightgreen)](https://discordapp.com/invite/Sewv6av)
 
